@@ -1,0 +1,21 @@
+.rc-tooltip {
+  position: absolute !important;
+  /* animation: showAnim2 50ms forwards; */
+}
+.rc-tooltip-inner {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-radius: 5px !important;
+}
+.rc-tooltip-arrow-inner {
+  border-bottom-color: black !important;
+}
+
+.rc-tooltip-hidden {
+  /* animation: hideAnim2 10ms forwards; */
+  display: block !important;
+  visibility: collapse;
+}
+/* .Toastify + div {
+  margin: 0 !important;
+} */

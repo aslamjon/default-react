@@ -1,0 +1,32 @@
+#stages:
+#  - run
+#
+#build_process:
+#  stage: run
+#  script:
+#    - npm install
+#    - npm run build
+#    - cp -r build/ /var/www/lms.pdp.university/
+#    - systemctl restart universitypdp
+#  only:
+#    - main
+
+#new
+#/var/www/university-newlms
+
+stages:
+  - test
+
+test:
+  stage: test
+  image: node:14
+  script:
+    - rsync -rult --delete-after --exclude=.git/ --exclude=.gitlab-ci.yml --exclude=node_modules/ $CI_PROJECT_DIR/ /var/www/university-newlms-test
+    - cd /var/www/university-newlms-test && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash && export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" && nvm install 14.17.5
+    - npm install && npm run build
+  tags:
+    - devops
+  only:
+    - main
+
+
